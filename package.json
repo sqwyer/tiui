@@ -1,0 +1,16 @@
+{
+	"dependencies": {
+		"xml2js": "^0.4.23"
+	},
+	"devDependencies": {
+		"@types/node": "^18.11.16",
+		"@types/xml2js": "^0.4.11",
+		"ts-node": "^10.9.1"
+	},
+	"scripts": {
+		"dev": "ts-node gen/src/index.ts -f",
+		"build": "cd gen && npx tsc",
+		"run": "cd gen && npx tsc && cd .. && node gen/dist/index",
+		"pretty": "npx prettier --write ."
+	}
+}

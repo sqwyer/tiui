@@ -1,16 +1,23 @@
 "@ui/List"
-
-For(X,0,V)
+Goto 1
+** uses X as loop variable **
+V = array length
+Y = selected child (#)
+Lbl 1
+"PRGM-START"
+If V>9
+Then
+For(X,0,9)
 X→I
-prgm STRARRAY
+prgm @utils/StrArray
 Output(X-Y+1,3,Str1)
 End
-Goto 2
-"@test/List"
-ClrHome
-"A,B,C,D,"→Str0
-3→V
-0→Y
-prgm LIST
-Pause
-Lbl 2
+Else
+Then
+For(X,0,V)
+X→I
+prgm @utils/StrArray
+Output(X-Y+1,3,Str1)
+End
+End
+"PRGM-END"

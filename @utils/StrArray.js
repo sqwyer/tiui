@@ -5,17 +5,17 @@ let pos = 0;
 let start = 0;
 let end = 0;
 
-for(let X = 1; X < Str0.length; X++) {
-    X = Str0.indexOf(",", X)
-    pos++;
-    if(pos == I) {
-        start = X;
-    }
-    if(pos == I+1) {
-        end = X;
-    }
+for (let X = 1; X < Str0.length; X++) {
+	X = Str0.indexOf(",", X);
+	pos++;
+	if (pos == I) {
+		start = X;
+	}
+	if (pos == I + 1) {
+		end = X;
+	}
 }
 
-console.log(
-    Str0.substring(start+1, end)
-)
+console.log(Str0.substring(start + 1, end));
+
+// arr = ["a","b","c","d"], arr[I]
