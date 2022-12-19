@@ -1,4 +1,5 @@
 import { readFileSync } from "fs";
+import { List } from "./components/List";
 import { xml, type result } from "./xml";
 
 export const prgm = (name: string) => {
@@ -19,30 +20,27 @@ export const prgm = (name: string) => {
 };
 
 export const transpile = (): string => {
-	let output = "ClrHome";
+	let output = "ClrHome\n1→Q";
 	xml(function (res: result) {
 		const { app } = res;
+		let pages = "";
 
 		app.page.forEach((page) => {
 			let content = "";
 			if (page.list) {
-				page.list.forEach((list) => {
-					let str0 = "";
-					let l = -1;
-					list.child.forEach((child) => {
-						str0 += `${child},`;
-						l++;
-					});
-					content += `\n\"${str0}\"→Str0\n0→Y\n${l}→V\n${prgm(
-						"@ui/List"
-					)}`;
+				page.list.forEach((elem) => {
+					content += List(elem);
 				});
 			}
-			content += prgm("@ui/Page");
-			output += content;
+			pages += `If Q=${page.$.id}\nThen\n${content}\nEnd`;
 		});
+
+		output += `
+\nWhile 1
+\n${prgm("@utils/WaitInput")}
+\n${pages}
+\nEnd
+`;
 	});
-	return (output + `\n${prgm("@utils/WaitInput")}`)
-		.replace(/^\s*[\r\n]/gm, "")
-		.replace(/^ +/gm, "");
+	return output.replace(/^\s*[\r\n]/gm, "").replace(/^ +/gm, "");
 };
